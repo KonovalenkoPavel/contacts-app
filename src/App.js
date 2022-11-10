@@ -1,5 +1,12 @@
+import { Contacts } from "./pages/Contacts";
+import bootstrap from "bootstrap/dist/css/bootstrap.css";
+
 function App() {
-  return <div>Work</div>;
+  return (
+    <>
+      <Contacts />
+    </>
+  );
 }
 
 export default App;
