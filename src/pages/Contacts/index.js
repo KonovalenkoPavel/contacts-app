@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { ContactsTable } from "./ContactsTable";
 
 const useContacts = () => {
   const [data, setData] = useState([]);
@@ -41,12 +42,7 @@ export const Contacts = () => {
   }
   return (
     <>
-      <div>
-        it Work
-        <button type="button" class="btn btn-primary">
-          Primary
-        </button>
-      </div>
+      <ContactsTable contacts={contacts.data} />
     </>
   );
 };
