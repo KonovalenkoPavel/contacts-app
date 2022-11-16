@@ -1,5 +1,6 @@
 import React from "react";
 import { CopyToClickbordText } from "../../../components/CopyToClickbordText";
+import { Nationality } from "../../../constantce/nationality";
 
 export const ContactsTable = (props) => {
   const tableBody = props.contacts.map((contact) => {
@@ -64,10 +65,11 @@ export const ContactsTable = (props) => {
           <CopyToClickbordText text={contact.phone} />
         </td>
         <td>{createLocation()}</td>
-        <td>{contact.location.country}</td>
+        <td>{Nationality[contact.nat]}</td>
       </tr>
     );
   });
+
   return (
     <>
       <table className="table">

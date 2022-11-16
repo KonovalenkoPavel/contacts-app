@@ -35,14 +35,15 @@ export const Contacts = () => {
   const contacts = useContacts();
 
   if (contacts.isLoading) {
-    return <div>...loading</div>;
+    return <div>loading...</div>;
   }
   if (contacts.isError) {
     return <div>...error</div>;
   }
   return (
-    <>
+    <div className="container">
+      <h1>Contacts</h1>
       <ContactsTable contacts={contacts.data} />
-    </>
+    </div>
   );
 };
