@@ -1,7 +1,7 @@
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import PropTypes from "prop-types";
 
-const ToggleDataViewMode = ({ setDataViewMode, dataViewMode }) => {
+const ToggleDataViewMode = memo(({ setDataViewMode, dataViewMode }) => {
   const handleChangeDataViewMode = useCallback(
     (dataView) => {
       setDataViewMode(dataView);
@@ -32,7 +32,7 @@ const ToggleDataViewMode = ({ setDataViewMode, dataViewMode }) => {
       </a>
     </div>
   );
-};
+});
 
 export default ToggleDataViewMode;
 
