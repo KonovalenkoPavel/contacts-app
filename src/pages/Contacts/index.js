@@ -1,7 +1,8 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useState } from "react";
 import ContactFilter from "./ContactFilter/ContactFilter";
 import MainContent from "./MainContent";
+import Pagination from "./Pagination/Pagination";
 import ToggleDataViewMode from "./ToggleDataViewMode/ToggleDataViewMode";
 import { useContacts } from "./useContacts";
 
@@ -36,6 +37,12 @@ export const Contacts = () => {
     localStorage.getItem("dataViewMode") || "table"
   );
   const [filters, setFilters] = useState(FiltersDefaultValue);
+  const [currentPage, setCurrentPage] = useState(1);
+  const contactsOnPageValue = 10;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters]);
 
   const updateFilter = useCallback((value, name) => {
     setFilters((prevFilter) => ({
@@ -53,6 +60,11 @@ export const Contacts = () => {
     setFilters(FiltersDefaultValue);
   }, []);
 
+  const contactOnPage = filtredContacts.slice(
+    (currentPage - 1) * contactsOnPageValue,
+    contactsOnPageValue * currentPage
+  );
+
   return (
     <div className="container">
       <div className="d-flex justify-content-between">
@@ -69,7 +81,13 @@ export const Contacts = () => {
         updateFilter={updateFilter}
       />
 
-      <MainContent contacts={filtredContacts} dataViewMode={dataViewMode} />
+      <MainContent contacts={contactOnPage} dataViewMode={dataViewMode} />
+      <Pagination
+        contacts={filtredContacts}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+        contactsOnPageValue={contactsOnPageValue}
+      />
     </div>
   );
 };
