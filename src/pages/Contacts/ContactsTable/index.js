@@ -2,8 +2,23 @@ import React from "react";
 import { CopyToClickbordText } from "../../../components/CopyToClickbordText";
 import { Nationality } from "../../../constantce/nationality";
 
-export const ContactsTable = (props) => {
-  const tableBody = props.contacts.map((contact) => {
+export const ContactsTable = ({ contacts, setFilters, filters }) => {
+  const handleSortChange = () => {
+    switch (filters.sortedByFirstName) {
+      case "noSort":
+        setFilters({ ...filters, sortedByFirstName: "AZ" });
+        break;
+      case "AZ":
+        setFilters({ ...filters, sortedByFirstName: "ZA" });
+        break;
+      case "ZA":
+        setFilters({ ...filters, sortedByFirstName: "noSort" });
+        break;
+    }
+    console.log(filters);
+  };
+
+  const tableBody = contacts.map((contact) => {
     const createName = () => {
       const { title, first, last } = contact.name;
       return `${title}. ${first} ${last}`;
@@ -76,7 +91,20 @@ export const ContactsTable = (props) => {
         <thead>
           <tr>
             <th scope="col">Avatar</th>
-            <th scope="col">Full Name</th>
+            <th
+              scope="col"
+              className="d-flex"
+              onClick={() => handleSortChange()}
+            >
+              Full Name
+              {filters.sortedByFirstName === "noSort" ? (
+                <i class="bi bi-funnel-fill"></i>
+              ) : filters.sortedByFirstName === "AZ" ? (
+                <i class="bi bi-sort-alpha-down"></i>
+              ) : (
+                <i class="bi bi-sort-alpha-down-alt"></i>
+              )}
+            </th>
             <th scope="col">Birthday</th>
             <th scope="col">Email</th>
             <th scope="col">Phone</th>

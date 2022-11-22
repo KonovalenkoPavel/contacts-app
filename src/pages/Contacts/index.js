@@ -10,6 +10,7 @@ const FiltersDefaultValue = {
   fullname: "",
   gender: "",
   nationality: "",
+  sortedByFirstName: "noSort",
 };
 
 const filterByFullName = ({ first, last }, fullname) =>
@@ -27,7 +28,6 @@ const filterByNationality = (nationality, filtersNationality) => {
   if (filtersNationality.length === 0) {
     return true;
   }
-  console.log(nationality, filtersNationality);
   return nationality === filtersNationality;
 };
 
@@ -60,7 +60,26 @@ export const Contacts = () => {
     setFilters(FiltersDefaultValue);
   }, []);
 
-  const contactOnPage = filtredContacts.slice(
+  let contactsAfterAZFilter;
+  switch (filters.sortedByFirstName) {
+    case "noSort":
+      contactsAfterAZFilter = filtredContacts;
+      break;
+    case "AZ":
+      contactsAfterAZFilter = filtredContacts.sort((a, b) =>
+        a.name.first > b.name.first ? 1 : -1
+      );
+      break;
+    case "ZA":
+      contactsAfterAZFilter = filtredContacts.sort((a, b) =>
+        a.name.first < b.name.first ? 1 : -1
+      );
+      break;
+    default:
+      return <>ошибка сортировки</>;
+  }
+
+  const contactOnPage = contactsAfterAZFilter.slice(
     (currentPage - 1) * contactsOnPageValue,
     contactsOnPageValue * currentPage
   );
@@ -81,7 +100,12 @@ export const Contacts = () => {
         updateFilter={updateFilter}
       />
 
-      <MainContent contacts={contactOnPage} dataViewMode={dataViewMode} />
+      <MainContent
+        contacts={contactOnPage}
+        dataViewMode={dataViewMode}
+        filters={filters}
+        setFilters={setFilters}
+      />
       <Pagination
         contacts={filtredContacts}
         setCurrentPage={setCurrentPage}
