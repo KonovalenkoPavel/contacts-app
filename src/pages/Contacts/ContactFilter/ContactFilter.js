@@ -35,7 +35,7 @@ const ContactFilter = memo(({ filters, updateFilter, clearFilters }) => {
           id="inputGroupSelect01"
           onChange={(event) => handleChangeFilter(event, "gender")}
         >
-          <option value="">All</option>
+          <option value="">Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
@@ -47,7 +47,7 @@ const ContactFilter = memo(({ filters, updateFilter, clearFilters }) => {
           id="inputGroupSelect02"
           onChange={(event) => handleChangeFilter(event, "nationality")}
         >
-          <option value="">All</option>
+          <option value="">Nationality</option>
           {Object.entries(Nationality).map(([key, value]) => {
             return (
               <option key={key} value={key}>
@@ -58,8 +58,8 @@ const ContactFilter = memo(({ filters, updateFilter, clearFilters }) => {
         </select>
       </div>
       <div className="input-group form-control d-flex justify-content-end">
-        <button type="button" class="btn btn-light" onClick={clearFilters}>
-          <i class="bi bi-x"></i>
+        <button type="button" className="btn btn-light" onClick={clearFilters}>
+          <i className="bi bi-x"></i>
           clear
         </button>
       </div>

@@ -15,7 +15,6 @@ export const ContactsTable = ({ contacts, setFilters, filters }) => {
         setFilters({ ...filters, sortedByFirstName: "noSort" });
         break;
     }
-    console.log(filters);
   };
 
   const tableBody = contacts.map((contact) => {
@@ -98,11 +97,11 @@ export const ContactsTable = ({ contacts, setFilters, filters }) => {
             >
               Full Name
               {filters.sortedByFirstName === "noSort" ? (
-                <i class="bi bi-funnel-fill"></i>
+                <i className="bi bi-funnel-fill"></i>
               ) : filters.sortedByFirstName === "AZ" ? (
-                <i class="bi bi-sort-alpha-down"></i>
+                <i className="bi bi-sort-alpha-down"></i>
               ) : (
-                <i class="bi bi-sort-alpha-down-alt"></i>
+                <i className="bi bi-sort-alpha-down-alt"></i>
               )}
             </th>
             <th scope="col">Birthday</th>
