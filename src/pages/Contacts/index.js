@@ -84,6 +84,15 @@ export const Contacts = () => {
     contactsOnPageValue * currentPage
   );
 
+  const malesCount = contactsAfterAZFilter.filter(
+    (c) => c.gender === "male"
+  ).length;
+  const famaleCount = contactsAfterAZFilter.filter(
+    (c) => c.gender === "female"
+  ).length;
+  const whoPredominate =
+    malesCount > famaleCount ? "male predominate" : "famale predominate";
+
   return (
     <div className="container">
       <div className="d-flex justify-content-between">
@@ -106,6 +115,27 @@ export const Contacts = () => {
         filters={filters}
         setFilters={setFilters}
       />
+
+      <h3>Statistic</h3>
+      <div className="d-flex alert alert-primary">
+        <div className="d-flex flex-column">
+          <span>Collection size</span>
+          <div>{contactsAfterAZFilter.length}</div>
+        </div>
+        <div className="d-flex flex-column">
+          <div className="d-flex">
+            <div className="d-flex flex-column">
+              <span>Males</span>
+              <div>{malesCount}</div>
+            </div>
+            <div>
+              <span>Famales</span>
+              <div>{famaleCount}</div>
+            </div>
+          </div>
+          <div>{whoPredominate}</div>
+        </div>
+      </div>
       <Pagination
         contacts={filtredContacts}
         setCurrentPage={setCurrentPage}
