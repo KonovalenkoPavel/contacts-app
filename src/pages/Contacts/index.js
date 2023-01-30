@@ -5,40 +5,20 @@ import MainContent from "./MainContent";
 import Pagination from "./Pagination/Pagination";
 import ToggleDataViewMode from "./ToggleDataViewMode/ToggleDataViewMode";
 import { useContacts } from "./useContacts";
-import { Nationality } from "../../constantce/nationality";
 import Stastic from "./ToggleDataViewMode/Statistic";
-
-const FiltersDefaultValue = {
-  fullname: "",
-  gender: "",
-  nationality: "",
-  sortedByFirstName: "noSort",
-};
-
-const filterByFullName = ({ first, last }, fullname) =>
-  first.toLowerCase().includes(fullname.toLowerCase()) ||
-  last.toLowerCase().includes(fullname.toLowerCase());
-
-const filterByGender = (filtersGender, contact) => {
-  if (filtersGender.length === 0) {
-    return true;
-  }
-  return contact === filtersGender;
-};
-
-const filterByNationality = (nationality, filtersNationality) => {
-  if (filtersNationality.length === 0) {
-    return true;
-  }
-  return nationality === filtersNationality;
-};
+import { filtersDefaultValue } from "./defaultFilters";
+import {
+  filterByFullName,
+  filterByGender,
+  filterByNationality,
+} from "./utiles/utiles";
 
 export const Contacts = () => {
   const contacts = useContacts();
   const [dataViewMode, setDataViewMode] = useState(
     localStorage.getItem("dataViewMode") || "table"
   );
-  const [filters, setFilters] = useState(FiltersDefaultValue);
+  const [filters, setFilters] = useState(filtersDefaultValue);
   const [currentPage, setCurrentPage] = useState(1);
   const contactsOnPageValue = 10;
 
@@ -59,7 +39,7 @@ export const Contacts = () => {
     .filter((c) => filterByNationality(c.nat, filters.nationality));
 
   const clearFilters = useCallback(() => {
-    setFilters(FiltersDefaultValue);
+    setFilters(filtersDefaultValue);
   }, []);
 
   let contactsAfterAZFilter;
