@@ -1,1 +1,3 @@
-export const urlContacts = "https://randomuser.me/api/?results=200";
+const urlContacts = "https://randomuser.me/api/?results=200";
+
+export { urlContacts };

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { urlContacts } from "../../api/api";
 
-export const useContacts = () => {
+const useContacts = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -32,3 +32,5 @@ export const useContacts = () => {
     isError,
   };
 };
+
+export { useContacts };

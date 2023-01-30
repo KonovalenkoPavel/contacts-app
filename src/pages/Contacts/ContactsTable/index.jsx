@@ -2,7 +2,7 @@ import React from "react";
 import { CopyToClickbordText } from "../../../components/CopyToClickbordText";
 import { Nationality } from "../../../constantce/nationality";
 
-export const ContactsTable = ({ contacts, setFilters, filters }) => {
+const ContactsTable = ({ contacts, setFilters, filters }) => {
   const handleSortChange = () => {
     switch (filters.sortedByFirstName) {
       case "noSort":
@@ -116,3 +116,5 @@ export const ContactsTable = ({ contacts, setFilters, filters }) => {
     </>
   );
 };
+
+export { ContactsTable };

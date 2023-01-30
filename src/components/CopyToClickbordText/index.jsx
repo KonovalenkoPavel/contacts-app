@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { useCallback, useState } from "react";
 import { useCopyToClipboard } from "react-use";
 
-export const CopyToClickbordText = ({ text }) => {
+const CopyToClickbordText = ({ text }) => {
   const [, copyToClipboard] = useCopyToClipboard();
   const [statusCopy, setStatusCopy] = useState("Copy");
 
@@ -26,6 +26,8 @@ export const CopyToClickbordText = ({ text }) => {
     </a>
   );
 };
+
+export { CopyToClickbordText };
 
 CopyToClickbordText.propTypes = {
   text: PropTypes.string.isRequired,

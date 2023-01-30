@@ -15,8 +15,8 @@ import {
   filterSortZA,
 } from "./utiles/utiles";
 
-export const Contacts = () => {
-  const contacts = useContacts();
+const Contacts = () => {
+  const { data, isError, isLoading } = useContacts();
   const [dataViewMode, setDataViewMode] = useState(
     localStorage.getItem("dataViewMode") || "table"
   );
@@ -35,7 +35,7 @@ export const Contacts = () => {
     }));
   }, []);
 
-  const filteredContacts = contacts.data
+  const filteredContacts = data
     .filter(({ name }) => filterByFullName(name, filters.fullName))
     .filter(({ gender }) => filterByGender(filters.gender, gender))
     .filter(({ nat }) => filterByNationality(nat, filters.nationality));
@@ -82,6 +82,8 @@ export const Contacts = () => {
 
       <MainContent
         contacts={contactOnPage}
+        isLoading={isLoading}
+        isError={isError}
         dataViewMode={dataViewMode}
         filters={filters}
         setFilters={setFilters}
@@ -97,3 +99,5 @@ export const Contacts = () => {
     </div>
   );
 };
+
+export { Contacts };

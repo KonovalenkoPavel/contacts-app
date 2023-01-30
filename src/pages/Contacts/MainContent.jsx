@@ -1,17 +1,17 @@
 import { ContactsTable } from "./ContactsTable";
 
-export const MainContent = ({
-  contacts,
-  dataViewMode,
-  filters,
-  setFilters,
-}) => {
-  if (contacts.isLoading) {
+const MainContent = (props) => {
+  const { contacts, isLoading, isError, dataViewMode, filters, setFilters } =
+    props;
+
+  if (isLoading) {
     return <div>loading...</div>;
   }
-  if (contacts.isError) {
+
+  if (isError) {
     return <div>...error</div>;
   }
+
   if (dataViewMode === "table") {
     return (
       <ContactsTable
@@ -21,9 +21,8 @@ export const MainContent = ({
       />
     );
   }
-  if (dataViewMode === "grid") {
-    return <div>Grid</div>;
-  }
+
+  return <div>Grid</div>;
 };
 
 export default MainContent;

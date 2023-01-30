@@ -1,6 +1,6 @@
 import { Nationality } from "../../../constantce/nationality";
 
-export const Stastic = ({ contactsAfterAZFilter }) => {
+const Stastic = ({ contactsAfterAZFilter }) => {
   const malesCount = contactsAfterAZFilter.filter(
     (c) => c.gender === "male"
   ).length;
