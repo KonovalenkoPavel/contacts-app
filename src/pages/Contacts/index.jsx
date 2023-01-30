@@ -11,6 +11,8 @@ import {
   filterByFullName,
   filterByGender,
   filterByNationality,
+  filterSortAZ,
+  filterSortZA,
 } from "./utiles/utiles";
 
 export const Contacts = () => {
@@ -27,16 +29,16 @@ export const Contacts = () => {
   }, [filters]);
 
   const updateFilter = useCallback((value, name) => {
-    setFilters((prevFilter) => ({
-      ...prevFilter,
+    setFilters((prevFilters) => ({
+      ...prevFilters,
       [name]: value,
     }));
   }, []);
 
-  const filtredContacts = contacts.data
-    .filter((c) => filterByFullName(c.name, filters.fullname))
-    .filter((c) => filterByGender(filters.gender, c.gender))
-    .filter((c) => filterByNationality(c.nat, filters.nationality));
+  const filteredContacts = contacts.data
+    .filter(({ name }) => filterByFullName(name, filters.fullName))
+    .filter(({ gender }) => filterByGender(filters.gender, gender))
+    .filter(({ nat }) => filterByNationality(nat, filters.nationality));
 
   const clearFilters = useCallback(() => {
     setFilters(filtersDefaultValue);
@@ -45,17 +47,13 @@ export const Contacts = () => {
   let contactsAfterAZFilter;
   switch (filters.sortedByFirstName) {
     case "noSort":
-      contactsAfterAZFilter = filtredContacts;
+      contactsAfterAZFilter = filteredContacts;
       break;
     case "AZ":
-      contactsAfterAZFilter = filtredContacts.sort((a, b) =>
-        a.name.first > b.name.first ? 1 : -1
-      );
+      contactsAfterAZFilter = filterSortAZ(filteredContacts);
       break;
     case "ZA":
-      contactsAfterAZFilter = filtredContacts.sort((a, b) =>
-        a.name.first < b.name.first ? 1 : -1
-      );
+      contactsAfterAZFilter = filterSortZA(filteredContacts);
       break;
     default:
       return <>ошибка сортировки</>;
@@ -91,7 +89,7 @@ export const Contacts = () => {
       <Stastic contactsAfterAZFilter={contactsAfterAZFilter} />
 
       <Pagination
-        contacts={filtredContacts}
+        contacts={filteredContacts}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
         contactsOnPageValue={contactsOnPageValue}

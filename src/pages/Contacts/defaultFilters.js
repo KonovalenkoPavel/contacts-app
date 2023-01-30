@@ -1,5 +1,5 @@
 export const filtersDefaultValue = {
-  fullname: "",
+  fullName: "",
   gender: "",
   nationality: "",
   sortedByFirstName: "noSort",

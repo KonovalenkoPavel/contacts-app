@@ -16,8 +16,8 @@ const ContactFilter = memo(({ filters, updateFilter, clearFilters }) => {
             className="form-control"
             placeholder="Search by full name"
             aria-describedby="button-addon1"
-            value={filters.fullname}
-            onChange={(event) => handleChangeFilter(event, "fullname")}
+            value={filters.fullName}
+            onChange={(event) => handleChangeFilter(event, "fullName")}
           />
           <button
             className="btn btn-outline-secondary"
