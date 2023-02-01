@@ -1,4 +1,4 @@
-import { Nationality } from "../../../constantce/nationality";
+import { nationality } from "../../../constantce/nationality";
 
 const Stastic = ({ contactsAfterAZFilter }) => {
   const malesCount = contactsAfterAZFilter.filter(
@@ -23,7 +23,7 @@ const Stastic = ({ contactsAfterAZFilter }) => {
     return Object.entries(nationalitiesObj).map(([key, value]) => {
       return (
         <span key={key}>
-          <b>{Nationality[key]}</b>: {`${value} contact  `}
+          <b>{nationality[key]}</b>: {`${value} contact  `}
         </span>
       );
     });

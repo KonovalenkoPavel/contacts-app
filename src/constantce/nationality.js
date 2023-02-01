@@ -1,4 +1,4 @@
-const Nationality = {
+const nationality = {
   AU: "Australian",
   BR: "Brazilian",
   CA: "Canadian",
@@ -22,4 +22,4 @@ const Nationality = {
   US: "American",
 };
 
-export { Nationality };
+export { nationality };

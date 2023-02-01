@@ -1,4 +1,4 @@
-import { ContactsTable } from "./ContactsTable";
+import { ContactsTable } from "./ContactsTable/ContactsTable";
 
 const MainContent = (props) => {
   const { contacts, isLoading, isError, dataViewMode, filters, setFilters } =

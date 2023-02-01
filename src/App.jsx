@@ -1,4 +1,4 @@
-import { Contacts } from "./pages/Contacts";
+import { Contacts } from "./pages/Contacts/Contacts";
 import "bootstrap/dist/css/bootstrap.css";
 
 const App = () => {

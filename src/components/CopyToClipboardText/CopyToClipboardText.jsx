@@ -2,13 +2,14 @@ import PropTypes from "prop-types";
 import React, { useCallback, useState } from "react";
 import { useCopyToClipboard } from "react-use";
 
-const CopyToClickbordText = ({ text }) => {
+const CopyToClipboardText = ({ text }) => {
+  const COPY_STATUSES = { copy: "Copy", copied: "Copied" };
   const [, copyToClipboard] = useCopyToClipboard();
-  const [statusCopy, setStatusCopy] = useState("Copy");
+  const [statusCopy, setStatusCopy] = useState(COPY_STATUSES.copy);
 
   const onClickCopy = useCallback(() => {
     copyToClipboard(text);
-    setStatusCopy("Copied");
+    setStatusCopy(COPY_STATUSES.copied);
   }, [copyToClipboard, text]);
 
   return (
@@ -16,10 +17,10 @@ const CopyToClickbordText = ({ text }) => {
       href="#"
       data-bs-toggle="tooltip"
       data-bs-placement="top"
-      title={statusCopy}
+      aria-label={statusCopy}
       onClick={onClickCopy}
     >
-      <div className="d-flex flex-row p-2">
+      <div className="d-flex flex-row p-2" title={statusCopy}>
         <i className="bi bi-clipboard-check"></i>
         <div>{text}</div>
       </div>
@@ -27,8 +28,8 @@ const CopyToClickbordText = ({ text }) => {
   );
 };
 
-export { CopyToClickbordText };
+export { CopyToClipboardText };
 
-CopyToClickbordText.propTypes = {
+CopyToClipboardText.propTypes = {
   text: PropTypes.string.isRequired,
 };

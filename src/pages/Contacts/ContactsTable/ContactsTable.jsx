@@ -1,6 +1,6 @@
 import React from "react";
-import { CopyToClickbordText } from "../../../components/CopyToClickbordText";
-import { Nationality } from "../../../constantce/nationality";
+import { CopyToClipboardText } from "../../../components/CopyToClipboardText/CopyToClipboardText";
+import { nationality } from "../../../constantce/nationality";
 
 const ContactsTable = ({ contacts, setFilters, filters }) => {
   const handleSortChange = () => {
@@ -73,13 +73,13 @@ const ContactsTable = ({ contacts, setFilters, filters }) => {
           <div>{contact.dob.age} years</div>
         </td>
         <td>
-          <CopyToClickbordText text={contact.email} />
+          <CopyToClipboardText text={contact.email} />
         </td>
         <td>
-          <CopyToClickbordText text={contact.phone} />
+          <CopyToClipboardText text={contact.phone} />
         </td>
         <td>{createLocation()}</td>
-        <td>{Nationality[contact.nat]}</td>
+        <td>{nationality[contact.nat]}</td>
       </tr>
     );
   });

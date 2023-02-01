@@ -1,3 +1,5 @@
+import classNames from "classnames";
+
 const Pagination = ({
   contacts,
   setCurrentPage,
@@ -18,14 +20,16 @@ const Pagination = ({
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination">
-        {pageArr.map((p) => (
+        {pageArr.map((page) => (
           <li
-            className={"page-item" + currentPage === p ? " active" : ""}
-            key={p}
-            onClick={() => handlePageChange(p)}
+            className={classNames("page-item", {
+              active: currentPage === page,
+            })}
+            key={page}
+            onClick={() => handlePageChange(page)}
           >
             <a className="page-link" href="#">
-              {p}
+              {page}
             </a>
           </li>
         ))}
