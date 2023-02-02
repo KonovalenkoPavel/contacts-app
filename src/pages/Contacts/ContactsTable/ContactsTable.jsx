@@ -2,19 +2,36 @@ import React from "react";
 import { CopyToClipboardText } from "../../../components/CopyToClipboardText/CopyToClipboardText";
 import { nationality } from "../../../constantce/nationality";
 
-const ContactsTable = ({ contacts, setFilters, filters }) => {
+const ContactsTable = (props) => {
+  const { contacts, setFilters, filters } = props;
+  const FILTERS_BY_FIRST_NAME = {
+    noSort: "AZ",
+    AZ: "ZA",
+    ZA: "noSort",
+  };
+
   const handleSortChange = () => {
+    let sortedByFirstName = null;
+
     switch (filters.sortedByFirstName) {
-      case "noSort":
-        setFilters({ ...filters, sortedByFirstName: "AZ" });
+      case "noSort": {
+        sortedByFirstName = FILTERS_BY_FIRST_NAME.AZ;
         break;
-      case "AZ":
-        setFilters({ ...filters, sortedByFirstName: "ZA" });
+      }
+      case "AZ": {
+        sortedByFirstName = FILTERS_BY_FIRST_NAME.ZA;
         break;
-      case "ZA":
-        setFilters({ ...filters, sortedByFirstName: "noSort" });
+      }
+      case "ZA": {
+        sortedByFirstName = FILTERS_BY_FIRST_NAME.noSort;
         break;
+      }
+      default: {
+        return;
+      }
     }
+
+    setFilters({ ...filters, sortedByFirstName });
   };
 
   const tableBody = contacts.map((contact) => {
@@ -91,8 +108,8 @@ const ContactsTable = ({ contacts, setFilters, filters }) => {
           <tr>
             <th scope="col">Avatar</th>
             <th
-              scope="col"
               className="d-flex"
+              scope="col"
               onClick={() => handleSortChange()}
             >
               Full Name

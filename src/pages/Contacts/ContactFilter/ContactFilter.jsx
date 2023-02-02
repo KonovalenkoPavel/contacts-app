@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { memo } from "react";
+import { gender } from "../../../constantce/gender";
 import { nationality } from "../../../constantce/nationality";
 
 const ContactFilter = ({ filters, updateFilter, clearFilters }) => {
@@ -23,8 +24,9 @@ const ContactFilter = ({ filters, updateFilter, clearFilters }) => {
             className="btn btn-outline-secondary"
             type="button"
             id="button-addon-1"
+            aria-label="search"
           >
-            <i className="bi bi-search"></i>
+            <i className="bi bi-search" title="search"></i>
           </button>
         </div>
       </div>
@@ -36,8 +38,13 @@ const ContactFilter = ({ filters, updateFilter, clearFilters }) => {
           onChange={(event) => handleChangeFilter(event, "gender")}
         >
           <option value="">Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
+          {Object.entries(gender).map(([key, value]) => {
+            return (
+              <option key={key} value={value}>
+                {value}
+              </option>
+            );
+          })}
         </select>
       </div>
 
@@ -58,8 +65,13 @@ const ContactFilter = ({ filters, updateFilter, clearFilters }) => {
         </select>
       </div>
       <div className="input-group form-control d-flex justify-content-end">
-        <button type="button" className="btn btn-light" onClick={clearFilters}>
-          <i className="bi bi-x"></i>
+        <button
+          className="btn btn-light"
+          aria-label="clear"
+          type="button"
+          onClick={clearFilters}
+        >
+          <i className="bi bi-x" title="clear"></i>
           clear
         </button>
       </div>
