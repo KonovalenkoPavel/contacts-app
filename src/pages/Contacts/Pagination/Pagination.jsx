@@ -1,17 +1,14 @@
 import classNames from "classnames";
 
-const Pagination = ({
-  contacts,
-  setCurrentPage,
-  currentPage,
-  contactsOnPageValue,
-}) => {
-  const pageCount = Math.ceil(contacts.length / contactsOnPageValue);
+const Pagination = (props) => {
+  const { setCurrentPage, currentPage, itemsPerPage, totalItems } = props;
+  const pageCount = Math.ceil(totalItems / itemsPerPage) || 0;
 
-  let pageArr = [];
-  for (let i = 1; i <= pageCount; i++) {
-    pageArr.push(i);
-  }
+  // let pageArr = [];
+  // for (let i = 1; i <= pageCount; i++) {
+  //   pageArr.push(i);
+  // }
+  const pageArr = [...Array(pageCount)].map((_, index) => index + 1);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

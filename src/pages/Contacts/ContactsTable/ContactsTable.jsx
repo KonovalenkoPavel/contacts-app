@@ -35,10 +35,8 @@ const ContactsTable = (props) => {
   };
 
   const tableBody = contacts.map((contact) => {
-    const createName = () => {
-      const { title, first, last } = contact.name;
-      return `${title}. ${first} ${last}`;
-    };
+    const { title, first, last } = contact.name;
+    const createName = `${title}. ${first} ${last}`;
 
     const createData = () => {
       const ourDate = contact.dob.date;
@@ -63,10 +61,12 @@ const ContactsTable = (props) => {
     };
 
     const createLocation = () => {
+      const { country, postcode, city, street } = contact.location;
+      const { name, number } = street;
       return (
         <>
-          <b>{`/${contact.location.country}/`}</b>
-          <div>{`${contact.location.postcode} ${contact.location.city}, ${contact.location.street.name}, ${contact.location.street.number}`}</div>
+          <b>{`/${country}/`}</b>
+          <div>{`${postcode} ${city}, ${name}, ${number}`}</div>
         </>
       );
     };
@@ -78,12 +78,13 @@ const ContactsTable = (props) => {
             <img
               className="rounded-circle"
               src={contact.picture.thumbnail}
-              alt="contactLogo"
+              alt="contact logo"
+              loading="lazy"
             />
           </div>
         </td>
         <td>
-          <a href="_blanc">{createName()}</a>
+          <a href="_blank">{createName}</a>
         </td>
         <td>
           <div>{createData()}</div>
@@ -102,35 +103,29 @@ const ContactsTable = (props) => {
   });
 
   return (
-    <>
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Avatar</th>
-            <th
-              className="d-flex"
-              scope="col"
-              onClick={() => handleSortChange()}
-            >
-              Full Name
-              {filters.sortedByFirstName === "noSort" ? (
-                <i className="bi bi-funnel-fill"></i>
-              ) : filters.sortedByFirstName === "AZ" ? (
-                <i className="bi bi-sort-alpha-down"></i>
-              ) : (
-                <i className="bi bi-sort-alpha-down-alt"></i>
-              )}
-            </th>
-            <th scope="col">Birthday</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Location</th>
-            <th scope="col">Nationality</th>
-          </tr>
-        </thead>
-        <tbody>{tableBody}</tbody>
-      </table>
-    </>
+    <table className="table">
+      <thead>
+        <tr>
+          <th scope="col">Avatar</th>
+          <th className="d-flex" scope="col" onClick={handleSortChange}>
+            <span>Full Name</span>
+            {filters.sortedByFirstName === "noSort" ? (
+              <i className="bi bi-funnel-fill"></i>
+            ) : filters.sortedByFirstName === "AZ" ? (
+              <i className="bi bi-sort-alpha-down"></i>
+            ) : (
+              <i className="bi bi-sort-alpha-down-alt"></i>
+            )}
+          </th>
+          <th scope="col">Birthday</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Location</th>
+          <th scope="col">Nationality</th>
+        </tr>
+      </thead>
+      <tbody>{tableBody}</tbody>
+    </table>
   );
 };
 

@@ -91,10 +91,10 @@ const Contacts = () => {
       <Stastic contactsAfterAZFilter={contactsAfterAZFilter} />
 
       <Pagination
-        contacts={filteredContacts}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
         contactsOnPageValue={contactsOnPageValue}
+        totalItems={filteredContacts.length}
       />
     </div>
   );
